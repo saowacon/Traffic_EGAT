@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/bg03"
+    android:background="@drawable/bg2"
     android:focusableInTouchMode="false"
     android:touchscreenBlocksFocus="false"
     android:clickable="false">
