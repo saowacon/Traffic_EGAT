@@ -17,8 +17,8 @@
         android:textColor="@color/text"
         android:autoText="false"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:allowUndo="false" />
+        android:allowUndo="false"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Bind Widget เชื่อมตัวแปรกับ Widget บน GUI
+        // Bind Widget เชื่อมตัวแปรกับ Widget บน GUI บนหน้า Main
         bindWidget();
 
         //Button Controller ทำให้ปุ่มคลิกได้
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createListView() {
         // Setup intDrawable
-        int intDrawable[] = {R.drawable.traffic_01, R.drawable.traffic_02,
+        final int intDrawable[] = {R.drawable.traffic_01, R.drawable.traffic_02,
                 R.drawable.traffic_03, R.drawable.traffic_04, R.drawable.traffic_05,
                 R.drawable.traffic_06, R.drawable.traffic_07, R.drawable.traffic_08,
                 R.drawable.traffic_09, R.drawable.traffic_10, R.drawable.traffic_11,
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.traffic_15, R.drawable.traffic_16, R.drawable.traffic_17,
                 R.drawable.traffic_18, R.drawable.traffic_19, R.drawable.traffic_20};
         // Setup strTitle ใช้ Array เริ่มต้นที่ 0
-        String strTitle[] = new String[20];
+        final String strTitle[] = new String[20];
         strTitle[0] = "ห้ามเลี้ยวซ้าย";
         strTitle[1] = "ห้ามเลี้ยวขวา";
         strTitle[2] = "ตรงไป";
@@ -68,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
         MyAdapter objMyAdapter = new MyAdapter(MainActivity.this, intDrawable, strTitle);
         trafficListView.setAdapter(objMyAdapter);
 
+        // Active When Click ListView
+        trafficListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Intent to DetailActivity
+                Intent objIntent = new Intent(MainActivity.this, DetailActivity.class);
+                objIntent.putExtra("Title", strTitle[i]);
+                objIntent.putExtra("Image", intDrawable[i]);
+                objIntent.putExtra("Index", i);
+                startActivity(objIntent);
+
+            }
+        });
+
     } // Create ListView
 
     private void buttonController() {
@@ -84,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(objIntent);
             } // Event
         });
-    } //ButtonController
+    } // ButtonController
 
     private void bindWidget() {
         trafficListView = (ListView) findViewById(R.id.listView);
